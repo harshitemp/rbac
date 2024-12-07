@@ -1,0 +1,51 @@
+<div class="background">
+    <div class="shape"></div>
+    <div class="shape"></div>
+  </div>
+  
+  <div class="signup-container">
+    <!-- Image Section -->
+    <div class="signup-image">
+      <img src="/assests/signupimage.png" alt="Login Illustration" />
+    </div>
+  
+    <!-- Login Form Section -->
+    <form (ngSubmit)="onLogin()">
+      <h3>Login Here</h3>
+      
+      <label for="username">Username</label>
+      <input 
+        type="text" 
+        placeholder="Email or Phone" 
+        id="username" 
+        [(ngModel)]="username" 
+        name="username" 
+        required
+      />
+      
+      <label for="password">Password</label>
+      <input 
+        type="password" 
+        placeholder="Password" 
+        id="password" 
+        [(ngModel)]="password" 
+        name="password" 
+        required
+      />
+      
+      <button type="submit">Log In</button> 
+      <div class="social">
+        <div class="go" (click)="loginWithGoogle()">
+          <i class="fab fa-google"></i> Google
+        </div>
+        <div class="fb" (click)="loginWithFacebook()">
+          <i class="fab fa-facebook"></i> Facebook
+        </div>
+      </div>
+      <div class="signup">
+        Don't have an account? 
+        <a [routerLink]="'/signup-page'">Sign up</a>
+      </div>
+    </form>
+  </div>
+  

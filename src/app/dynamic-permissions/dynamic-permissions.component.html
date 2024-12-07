@@ -1,0 +1,61 @@
+<app-navabar></app-navabar>
+<div class="permissions-container">
+  <h3>Manage Role Permissions</h3>
+
+  <!-- Filter input -->
+  <div>
+    <label for="filterRole">Filter Roles:</label>
+    <input
+      id="filterRole"
+      type="text"
+      [(ngModel)]="filterRole"
+      placeholder="Enter role name"
+      class="form-control"
+    />
+  </div>
+
+  <!-- Sorting options -->
+  <div>
+    <label for="sortCriteria">Sort By:</label>
+    <select id="sortCriteria" [(ngModel)]="sortCriteria" (change)="sortRoles()">
+      <option value="name">Role Name</option>
+      <option value="permissionsCount">Permissions Count</option>
+    </select>
+    <button (click)="sortAscending = !sortAscending; sortRoles()" class="btn btn-secondary">
+      <i [ngClass]="sortAscending ? 'fas fa-arrow-up' : 'fas fa-arrow-down'"></i>
+    </button>
+  </div>
+
+  <!-- Display roles -->
+  <div *ngFor="let role of getFilteredRoles()" class="role-card">
+    <h4>{{ role.name }}</h4>
+
+    <div class="permissions-list">
+      <label *ngFor="let permission of allPermissions">
+        <input
+          type="checkbox"
+          [(ngModel)]="role.permissions[permission]"
+          (change)="onPermissionChange(role, permission)"
+        />
+        {{ permission }}
+      </label>
+    </div>
+
+    <button (click)="savePermissions(role)" class="btn btn-success">Update</button>
+  </div>
+</div>
+
+<!-- Modal for Custom Permission -->
+<div *ngIf="showCustomPermissionModal" class="modal show">
+  <div class="modal-content">
+    <h3>Add Custom Permission</h3>
+    <input
+      type="text"
+      [(ngModel)]="customPermission"
+      placeholder="Enter custom permission"
+      class="form-control"
+    />
+    <button (click)="addCustomPermission()" class="btn btn-primary">Add</button>
+    <button (click)="closeCustomPermissionModal()" class="btn btn-secondary">Cancel</button>
+  </div>
+</div>

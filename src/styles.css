@@ -1,0 +1,64 @@
+/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+/* Default light theme */
+:root {
+    --background-color: #f4f7fc;
+    --primary-bg-color: #ffffff;
+    --primary-text-color: #333;
+    --button-bg-color: #2ecc71;
+    --button-hover-bg-color: #27ae60;
+    --table-bg-color: #f4f7fc;
+    --table-text-color: #7f8c8d;
+    --header-color: #2c3e50;
+  }
+  
+  /* Dark theme */
+  [data-theme="dark"] {
+    --background-color: #333;
+    --primary-bg-color: #444;
+    --primary-text-color: #f4f7fc;
+    --button-bg-color: #2980b9;
+    --button-hover-bg-color: #1f6392;
+    --table-bg-color: #555;
+    --table-text-color: #ddd;
+    --header-color: #ecf0f1;
+  }
+  
+  /* Apply theme variables */
+  body {
+    background: var(--background-color);
+    color: var(--primary-text-color);
+  }
+  
+  .role-management-container {
+    background: var(--primary-bg-color);
+  }
+  
+  h2, .modal-content h3 {
+    color: var(--header-color);
+  }
+  
+  /* Button Styles */
+  .btn-primary {
+    background-color: var(--button-bg-color);
+  }
+  
+  .btn-primary:hover {
+    background-color: var(--button-hover-bg-color);
+  }
+  
+  /* Table Styling */
+  table th {
+    background-color: var(--table-bg-color);
+    color: var(--header-color);
+  }
+  
+  table td {
+    color: var(--table-text-color);
+  }
+  
+  /* Modal Styling */
+  .modal-content {
+    background-color: var(--primary-bg-color);
+  }
+  

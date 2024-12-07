@@ -1,0 +1,93 @@
+<app-navabar></app-navabar>
+<div class="user-management-container">
+  <h2>User Management</h2>
+
+  <!-- Filtering -->
+  <div class="filter-container">
+    <input 
+      type="text" 
+      class="form-control" 
+      placeholder="Search by name or email..." 
+      [(ngModel)]="searchTerm" 
+      (input)="filterUsers()" />
+  </div>
+
+  <!-- Sorting Dropdown -->
+  <div class="sort-container">
+    <select id="sortCriteria" class="form-control" [(ngModel)]="sortCriteria" (change)="sortUsers()">
+      <option value="name">Sort by Name</option>
+      <option value="email">Sort by Email</option>
+      <option value="role">Sort by Role</option>
+    </select>
+
+    <!-- Toggle Ascending/Descending -->
+    <button (click)="sortAscending = !sortAscending; sortUsers()" class="btn btn-secondary ml-2">
+      <i [ngClass]="sortAscending ? 'fas fa-arrow-up' : 'fas fa-arrow-down'"></i>
+    </button>
+  </div>
+
+  <!-- Add User Button -->
+  <button (click)="openAddUserForm()" class="btn btn-primary">Add User</button>
+
+  <!-- User List Table -->
+  <table class="table table-bordered mt-4">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of filteredUsers">
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.role }}</td>
+        <td>{{ user.status ? 'Active' : 'Inactive' }}</td>
+        <td>
+          <button (click)="editUser(user)" class="btn btn-warning">Edit</button>
+          <button (click)="deleteUser(user.id)" class="btn btn-danger">Delete</button>
+          <button (click)="toggleStatus(user)" class="btn" [ngClass]="user.status ? 'btn-secondary' : 'btn-success'">
+            {{ user.status ? 'Deactivate' : 'Activate' }}
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Add/Edit User Modal -->
+  <div *ngIf="showUserForm" class="modal show">
+    <div class="modal-content">
+      <h3>{{ editingUser ? 'Edit User' : 'Add User' }}</h3>
+      <form (ngSubmit)="saveUser()">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" [(ngModel)]="currentUser.name" name="name" required class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" [(ngModel)]="currentUser.email" name="email" required class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="role">Role</label>
+          <select id="role" [(ngModel)]="currentUser.role" name="role" required class="form-control">
+            <option value="Admin">Admin</option>
+            <option value="User">User</option>
+            <option value="Manager">Manager</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="status">Status</label>
+          <select id="status" [(ngModel)]="currentUser.status" name="status" required class="form-control">
+            <option [value]="true">Active</option>
+            <option [value]="false">Inactive</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-success">{{ editingUser ? 'Update' : 'Save' }}</button>
+        <button type="button" (click)="closeUserForm()" class="btn btn-secondary">Cancel</button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,82 @@
+<app-navabar></app-navabar>
+<div class="role-management-container">
+  <h2>Role Management</h2>
+  
+  
+  <!-- Filtering Input -->
+  <div class="filter-container">
+    <input 
+      type="text" 
+      class="form-control" 
+      placeholder="Search by role name..." 
+      [(ngModel)]="searchTerm" 
+      (input)="filterRoles()" />
+  </div>
+
+  <!-- Sorting Button -->
+  <div class="sort-container">
+    <button class="btn btn-secondary" (click)="sortRoles()">
+      Sort by Name {{ sortOrder ? '▲' : '▼' }}
+    </button>
+  </div>
+
+  <!-- Add Role Button -->
+  <button (click)="openAddRoleForm()" class="btn btn-primary">Add Role</button>
+
+  <!-- Role List Table -->
+  <table class="table table-bordered mt-4">
+    <thead>
+      <tr>
+        <th>Role Name</th>
+        <th>Permissions</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let role of filteredRoles">
+        <td>{{ role.name }}</td>
+        <td>{{ role.permissions.join(', ') }}</td>
+        <td>
+          <button (click)="openEditRoleForm(role)" class="btn btn-warning">Edit</button>
+          <button (click)="deleteRole(role.id!)" class="btn btn-danger">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Add/Edit Role Modal -->
+  <div *ngIf="showRoleForm" class="modal show">
+    <div class="modal-content">
+      <h3>{{ editingRole ? 'Edit Role' : 'Add Role' }}</h3>
+      <form (ngSubmit)="saveRole()">
+        <div class="form-group">
+          <label for="roleName">Role Name</label>
+          <input type="text" id="roleName" [(ngModel)]="currentRole.name" name="roleName" required class="form-control" />
+        </div>
+
+        <div class="form-group">
+          <label>Permissions</label>
+          <div *ngFor="let permission of allPermissions">
+            <label>
+              <input 
+                type="checkbox" 
+                [(ngModel)]="currentRole.permissions" 
+                [value]="permission" 
+                [checked]="hasPermission(permission)" 
+                (change)="togglePermission(permission)" /> 
+              {{ permission }}
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="customPermission">Custom Permission</label>
+          <input type="text" id="customPermission" [(ngModel)]="customPermission" name="customPermission" class="form-control" placeholder="Add custom permission" (keyup.enter)="addCustomPermission()" />
+        </div>
+
+        <button type="submit" class="btn btn-success">{{ editingRole ? 'Update' : 'Save' }}</button>
+        <button type="button" (click)="closeRoleForm()" class="btn btn-secondary">Cancel</button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+.theme-toggle-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: var(--icon-color, #000); /* Light theme by default */
+    transition: transform 0.3s, color 0.3s, box-shadow 0.3s;
+  }
+  
+  [data-theme="dark"] .theme-toggle-btn {
+    color: var(--icon-color, #fff); /* Dark theme color */
+  }
+  
+  .theme-toggle-btn:hover {
+    transform: scale(1.3) rotate(10deg); /* Zoom and slight rotation */
+    color: #ffb400; /* Add a glowing color effect */
+    box-shadow: 0 0 8px rgba(255, 180, 0, 0.8); /* Glowing shadow */
+  }
+  
+  .theme-toggle-btn:focus {
+    outline: none;
+  }
+  

@@ -1,0 +1,78 @@
+<div class="background">
+    <div class="shape"></div>
+    <div class="shape"></div>
+  </div>
+  
+  <div class="signup-container">
+    <form (ngSubmit)="onSignup()">
+      <h3>Sign Up Here</h3>
+  
+      <!-- Full Name Field -->
+      <label for="fullname">Full Name</label>
+      <input
+        type="text"
+        placeholder="Enter your full name"
+        id="fullname"
+        [(ngModel)]="fullname"
+        name="fullname"
+        required
+      />
+  
+      <!-- Email Field -->
+      <label for="email">Email</label>
+      <input
+        type="email"
+        placeholder="Enter your email"
+        id="email"
+        [(ngModel)]="email"
+        name="email"
+        required
+      />
+  
+      <!-- Phone Field -->
+      <label for="phone">Phone</label>
+      <input
+        type="text"
+        placeholder="Enter your phone number"
+        id="phone"
+        [(ngModel)]="phone"
+        name="phone"
+        required
+      />
+  
+      <!-- Password Field -->
+      <label for="password">Password</label>
+      <input
+        type="password"
+        placeholder="Create a password"
+        id="password"
+        [(ngModel)]="password"
+        name="password"
+        required
+      />
+  
+      <!-- Submit Button -->
+      <button type="submit">Sign Up</button>
+  
+      <!-- Social Media Login -->
+      <div class="social">
+        <div class="go" (click)="loginWithGoogle()">
+          <i class="fab fa-google"></i> Google
+        </div>
+        <div class="fb" (click)="loginWithFacebook()">
+          <i class="fab fa-facebook"></i> Facebook
+        </div>
+      </div>
+  
+      <!-- Redirect to Login -->
+      <div class="signup">
+        Already have an account? <a [routerLink]="'/login-page'">Log in</a>
+      </div>
+    </form>
+  
+    <!-- Image Section -->
+    <div class="signup-image">
+      <img src="/assests/signupimage.png" alt="Signup Image" />
+    </div>
+  </div>
+  
